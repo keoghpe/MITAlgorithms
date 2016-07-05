@@ -23,6 +23,7 @@ def algorithm1(problem, trace = None):
     subproblems.append((subStartR, subStartC2, subNumR, subNumC2))
 
     # get a list of all locations in the dividing column
+    # range(3) == [0, 1, 2]
     divider = crossProduct(range(problem.numRow), [mid])
 
     # find the maximum in the dividing column
@@ -45,6 +46,7 @@ def algorithm1(problem, trace = None):
     result = algorithm1(sub, trace)
     return problem.getLocationInSelf(sub, result)
 
+# possibly n^2 if you start at 0,0 and loop around the grid inwards
 def algorithm2(problem, location = (0, 0), trace = None):
     # if it's empty, we're done 
     if problem.numRow <= 0 or problem.numCol <= 0:
@@ -179,6 +181,12 @@ def crossProduct(list1, list2):
     """
     Returns all pairs with one item from the first list and one item from 
     the second list.  (Cartesian product of the two lists.)
+    
+    Emaphasis on Cartesian product:
+    	[a, b, c] X [x, y, z]
+	[ax, ay, az;
+	bx, by, bz;
+	cx, cy, cz]
 
     The code is equivalent to the following list comprehension:
         return [(a, b) for a in list1 for b in list2]
